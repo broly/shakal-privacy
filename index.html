@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Конфиденциальность Зыбучего Шакала</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+  :root {
+    --ground: #f7f5f0;
+    --surface: #ffffff;
+    --ink: #16161a;
+    --muted: #64646f;
+    --faint: #8d8d97;
+    --rule: #e2ded4;
+    --accent: #a37c00;
+    --accent-soft: #fdf4d6;
+    --note-ground: #f1efe7;
+    --shadow: 0 1px 2px rgba(20, 20, 26, .06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0e0e11;
+      --surface: #16161b;
+      --ink: #ececef;
+      --muted: #9a9aa6;
+      --faint: #6f6f7b;
+      --rule: #2a2a33;
+      --accent: #ffcc00;
+      --accent-soft: #241f06;
+      --note-ground: #1b1b21;
+      --shadow: none;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0e0e11;
+    --surface: #16161b;
+    --ink: #ececef;
+    --muted: #9a9aa6;
+    --faint: #6f6f7b;
+    --rule: #2a2a33;
+    --accent: #ffcc00;
+    --accent-soft: #241f06;
+    --note-ground: #1b1b21;
+    --shadow: none;
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    max-width: 44rem;
+    margin: 0 auto;
+    padding: clamp(2rem, 6vw, 4.5rem) clamp(1.25rem, 5vw, 2.5rem) 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  header { display: flex; flex-direction: column; gap: .75rem; }
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+    font-size: .7rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  h1 {
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    line-height: 1.1;
+    letter-spacing: -.02em;
+    text-wrap: balance;
+    margin: 0;
+  }
+  .meta {
+    font-family: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+    font-size: .78rem;
+    color: var(--faint);
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem 1.25rem;
+    padding-top: .5rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .summary {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+    box-shadow: var(--shadow);
+    padding: 1.35rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+  }
+  .summary p { margin: 0; }
+  .summary strong { font-weight: 600; }
+
+  section { display: flex; flex-direction: column; gap: .85rem; }
+  h2 {
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 1.12rem;
+    line-height: 1.3;
+    letter-spacing: -.005em;
+    margin: 0;
+    display: flex;
+    gap: .7rem;
+    align-items: baseline;
+  }
+  h2 .num {
+    font-family: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+    font-size: .8rem;
+    font-weight: 500;
+    color: var(--accent);
+    flex: none;
+  }
+  section p { margin: 0; }
+  section p + p { margin-top: -.15rem; }
+
+  ul { margin: 0; padding-left: 1.15rem; display: flex; flex-direction: column; gap: .45rem; }
+  li::marker { color: var(--faint); }
+
+  code {
+    font-family: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+    font-size: .85em;
+    background: var(--note-ground);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: .08em .35em;
+  }
+
+  .fill {
+    display: inline-block;
+    font-family: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+    font-size: .82em;
+    background: var(--accent-soft);
+    border: 1px dashed var(--accent);
+    color: var(--accent);
+    border-radius: 3px;
+    padding: .1em .45em;
+  }
+
+  .contact {
+    background: var(--note-ground);
+    border: 1px solid var(--rule);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+  }
+  .contact h2 { margin-bottom: .15rem; }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding-top: 1.25rem;
+    font-family: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+    font-size: .74rem;
+    color: var(--faint);
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="eyebrow">Политика конфиденциальности</div>
+    <h1>Зыбучий Шакал</h1>
+    <div class="meta">
+      <span>Приложение: com.broly.ssj</span>
+      <span>Редакция: 7 сентября 2026</span>
+      <span>Платформа: Android</span>
+    </div>
+  </header>
+
+  <div class="summary">
+    <p><strong>Приложение не собирает и не передаёт персональные данные.</strong></p>
+    <p>
+      «Зыбучий Шакал» умышленно ухудшает качество фотографий: уменьшает изображение,
+      сжимает его алгоритмом JPEG или WebP и растягивает обратно. Вся обработка происходит
+      на самом устройстве. Ваши фотографии никуда не отправляются — ни на наши серверы,
+      ни кому-либо ещё. Серверов у приложения нет вовсе.
+    </p>
+  </div>
+
+  <section>
+    <h2><span class="num">01</span> Какие данные обрабатываются</h2>
+    <p>
+      Приложение не запрашивает имя, адрес электронной почты, номер телефона, данные аккаунта,
+      геопозицию, список контактов или идентификаторы устройства. Регистрация не предусмотрена.
+    </p>
+    <p>
+      Единственное, с чем работает приложение, — фотография, которую вы сами выбрали в галерее
+      для обработки.
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="num">02</span> Что происходит с фотографией</h2>
+    <p>
+      Выбранная фотография загружается в память приложения, обрабатывается локально
+      средствами самого устройства и показывается на экране. Результат сохраняется в галерею
+      только тогда, когда вы нажимаете кнопку сохранения.
+    </p>
+    <p>
+      Изображение не выгружается в сеть ни на одном этапе. Приложение не содержит кода,
+      отправляющего изображения куда-либо.
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="num">03</span> Что хранится на устройстве</h2>
+    <p>
+      Чтобы работала система достижений, приложение сохраняет в локальном хранилище
+      (ключ <code>shakal:progress:v1</code>) следующее:
+    </p>
+    <ul>
+      <li>счётчик запусков приложения;</li>
+      <li>счётчик сохранённых изображений;</li>
+      <li>короткие необратимые отпечатки уже засчитанных фотографий — по ним нельзя
+        восстановить само изображение, они нужны только для того, чтобы одна и та же
+        фотография не засчитывалась дважды;</li>
+      <li>счётчик показанных картинок-шуток.</li>
+    </ul>
+    <p>
+      Эти данные остаются на устройстве, никуда не передаются и удаляются вместе
+      с приложением.
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="num">04</span> Разрешения</h2>
+    <ul>
+      <li><strong>Доступ к фотографиям</strong> — чтобы вы могли выбрать снимок для обработки
+        и сохранить результат обратно в галерею. Приложение запрашивает доступ только
+        к изображениям и только на запись при сохранении.</li>
+      <li><strong>Доступ в интернет</strong> — объявлен служебными компонентами платформы.
+        Приложение сетевых запросов не выполняет.</li>
+    </ul>
+    <p>
+      Камера, микрофон, геопозиция, контакты и видео приложению не нужны, и соответствующие
+      разрешения из него исключены.
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="num">05</span> Реклама, аналитика, третьи лица</h2>
+    <p>
+      В приложении нет рекламы, нет аналитики, нет счётчиков посещаемости и нет встроенных
+      покупок. Данные не передаются третьим лицам, потому что данные не собираются.
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="num">06</span> Дети</h2>
+    <p>
+      Приложение не предназначено для детей. Оно содержит юмористические изображения и
+      выражения, рассчитанные на взрослую аудиторию, и не адресовано лицам младше
+      возрастного рейтинга, указанного в магазине приложений.
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="num">07</span> Удаление данных</h2>
+    <p>
+      Так как данные не покидают устройство, отдельная процедура удаления не требуется.
+      Очистить всё можно двумя способами: стереть данные приложения в настройках Android
+      или удалить приложение.
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="num">08</span> Изменения политики</h2>
+    <p>
+      Если в приложении появятся функции, требующие обработки данных на стороне сервера,
+      эта политика будет обновлена до выхода такой версии, а дата редакции в шапке — изменена.
+    </p>
+  </section>
+
+  <div class="contact">
+    <h2><span class="num">09</span> Контакты</h2>
+    <p>
+      По вопросам конфиденциальности можно связаться с разработчиком через
+      страницу приложения в Google Play — адрес для связи указан в карточке
+      приложения, в разделе «Данные о разработчике».
+    </p>
+    <p>Разработчик: broly</p>
+  </div>
+
+  <footer>
+    Документ описывает приложение «Зыбучий Шакал» (com.broly.ssj) для Android.<br>
+    Редакция от 7 сентября 2026 года.
+  </footer>
+</div>
+</body>
+</html>
